@@ -2,7 +2,7 @@ SRC = main.c key_input.c mandelbrot.c
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -framework OpenGl -I libft -I mlx\
-		-framework Appkit -L mlx -lmlx -L libft -lft
+		-framework Appkit -L mlx -lmlx -L libft -lft -fsanitize=address
 MOBJ = $(SRC:.c=.o)
 
 NAME = fractol

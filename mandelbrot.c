@@ -33,7 +33,9 @@ int mandelbrot(t_fractol fract, t_mandelbrot *mb)
 	int y;
 	unsigned int color = 0;
 	int i;
+	int tmp;
 
+	mb->img_data = mlx_get_data_addr(fract.img_ptr, &tmp, &tmp, &tmp);
 	y = 0;
 	while (y < DWH)
 	{
@@ -44,11 +46,12 @@ int mandelbrot(t_fractol fract, t_mandelbrot *mb)
 			mb->pi = (y - DWH / 2) / (mb->zoom * DWH * 0.5) + mb->move_i;
 			
 			i = iterate_mandelbrot(mb);
-			color = (i < MAX_ITERATION) ? ((16777216-100) / MAX_ITERATION) * i + 100 : 0;
-			mlx_pixel_put(fract.mlx_ptr, fract.win_ptr, x, y, color);
+			color = (i < MAX_ITERATION) ? ((16777216-MIN_COLOR) / MAX_ITERATION) * i + MIN_COLOR : 0;
+			((unsigned int *)mb->img_data)[y * DWW + x] = color;
 			x++;
 		}
 		y++;
 	}
+	mlx_put_image_to_window(fract.mlx_ptr, fract.win_ptr, fract.img_ptr, 0, 0);
 	return (0);
 }

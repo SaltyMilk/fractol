@@ -2,16 +2,26 @@
 
 int key_hook(int keycode, t_fractol *fract)
 {
+	(void)fract;
+	
 	if (keycode == ESC)
 		exit(0);
+
+	return(19);
+}
+
+int mouse_hook(int keycode, int x, int y, t_fractol *fract)
+{
+	(void)x;
+	(void)y;
 	if (keycode == 4)
 	{
-		fract->mb.zoom *= 1.001;
+		fract->mb.zoom *= 1.1;
 		mandelbrot(*fract, &fract->mb);
 	}
 	else if (keycode == 5)
 	{
-		fract->mb.zoom /= 1.001;
+		fract->mb.zoom /= 1.1;
 		mandelbrot(*fract, &fract->mb);
 	}
 	return(19);

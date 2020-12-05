@@ -7,16 +7,19 @@
 #include <stdio.h>
 
 #define ESC 53
-#define DWW 1000 //DEFAULT WINDOW WIDTH
-#define DWH 750//DEFAULT WINDOW HEIGHT
+#define DWW 1000
+#define DWH 750
 
-//VALUE SHOULDN'T BE ABOVE 16777216 && under or equal to 0
+#define MIN_COLOR 65
+/*
+**VALUE SHOULDN'T BE ABOVE 16777216 && under or equal to 0
+*/
 #define MAX_ITERATION 256
 
-typedef struct	s_mandelbrot //
+typedef struct	s_mandelbrot
 {
-	double	pr;//Real position 
-	double	pi;//Imaginary position
+	double	pr;
+	double	pi;
 	double	old_r;
 	double	old_i;
 	double	f_r;
@@ -24,18 +27,21 @@ typedef struct	s_mandelbrot //
 	double	zoom;
 	double	move_r;
 	double	move_i;
+	char	*img_data;
 }				t_mandelbrot;
 
 typedef struct	s_fractol
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*img_ptr;
 	t_mandelbrot mb;
 }				t_fractol;
 
 
 int		exit_hook(void);
 int		key_hook(int keycode, t_fractol *param);
+int		mouse_hook(int keycode, int x, int y, t_fractol *fract);
 int		mandelbrot(t_fractol fract, t_mandelbrot *mb);
 void	init_mandelbrot(t_mandelbrot *mb);
 
