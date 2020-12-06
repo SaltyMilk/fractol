@@ -35,8 +35,8 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all: libft minilibx_all $(NAME)
 
-$(NAME): $(OBJ) $(MINILIBX_NAME)/libmlx.a libft/libft.a
-	@$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
+$(NAME): $(OBJ) $(MINILIBX_NAME)/libmlx.a libft/libft.a includes/fractol.h
+	@$(CC) $(LDFLAGS) $(LDLIBS) $(OBJ) $(MINILIBX_NAME)/libmlx.a libft/libft.a -o $@
 	@echo "Compilation of fractol:	\033[1;32mOK\033[m"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
