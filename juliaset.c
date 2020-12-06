@@ -26,8 +26,7 @@ void juloop(t_fractol *f, t_mandelbrot mb, int start[2], int lim[2])
 	int i;
 	unsigned color;
 	y = start[1];
-	mb.pr = 0;
-	mb.pi = 0;
+
 	while (y < lim[1])
 	{
 		x = start[0];
@@ -72,8 +71,8 @@ int juliaset(t_fractol *fract)
 	while (i < N_THREAD)
 	{
 		ta[i].f = fract;
-		ta[i].start = (DWW / N_THREAD) * i;
-		ta[i].end = (DWW / N_THREAD )* (i + 1);
+		ta[i].start = (DWW / N_THREAD) * (i);
+		ta[i].end = (DWW / N_THREAD )* (i + 2);
 		if (pthread_create(&(fract->mb.thread[i]), NULL, jcalc_pixels, (void *)&(ta[i])))
 			return (1);
 		i++;

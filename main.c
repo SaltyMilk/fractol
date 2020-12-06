@@ -26,16 +26,20 @@ void handle_args(int argc, char **argv, t_fractol *f)
 
 int main(int argc, char **argv)
 {
-	t_fractol fract;
+	t_fractol f;
 
-	handle_args(argc, argv, &fract);
-	fract.mlx_ptr = mlx_init();
-	fract.win_ptr = mlx_new_window(fract.mlx_ptr, DWW, DWH, "fractol");
-	fract.img_ptr = mlx_new_image(fract.mlx_ptr, DWW, DWH);
-	init_mandelbrot(&fract.mb);
-	fract.func(&fract);
-	mlx_key_hook(fract.win_ptr, key_hook, &fract);
-	mlx_hook(fract.win_ptr, 4, 4, mouse_hook, &fract);
-	mlx_hook(fract.win_ptr, 17, 0, exit_hook, NULL);
-	mlx_loop(fract.mlx_ptr);
+	handle_args(argc, argv, &f);
+	f.mlx_ptr = mlx_init();
+	f.win_ptr = mlx_new_window(f.mlx_ptr, DWW, DWH, "fractol");
+	f.img_ptr = mlx_new_image(f.mlx_ptr, DWW, DWH);
+	init_mandelbrot(&f.mb);
+	if (f.func == juliaset)
+		f.juliamod_win = mlx_new_window(f.mlx_ptr, 250, 250, "Julia modifier");
+	f.func(&f);
+	mlx_key_hook(f.win_ptr, key_hook, &f);
+	mlx_hook(f.win_ptr, 4, 4, mouse_hook, &f);
+	mlx_hook(f.win_ptr, 17, 0, exit_hook, NULL);
+	if (f.func == juliaset)
+		mlx_hook(f.juliamod_win, 6, 64, juliamod_hook, &f);
+	mlx_loop(f.mlx_ptr);
 }

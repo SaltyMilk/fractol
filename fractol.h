@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <pthread.h>
 
-#define DWW 1000
+#define DWW 1024
 #define DWH 750
 #define MOVE_VAL 0.1
 
@@ -26,7 +26,7 @@
 **VALUE SHOULDN'T BE ABOVE 16777216 && under or equal to 0 for MAX_ITERATION
 */
 #define MAX_ITERATION 256
-#define N_THREAD 8
+#define N_THREAD 4
 typedef struct	s_mandelbrot
 {
 	double			pr;
@@ -47,6 +47,7 @@ typedef struct	s_fractol
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
+	void			*juliamod_win;
 	void			*img_ptr;
 	int 			(*func)(t_fractol *);
 	t_mandelbrot	mb;
@@ -62,6 +63,7 @@ typedef struct	s_thread_arg
 int		exit_hook(void);
 int		key_hook(int keycode, t_fractol *param);
 int		mouse_hook(int keycode, int x, int y, t_fractol *fract);
+int		juliamod_hook(int x, int y, t_fractol *fract);
 int		mandelbrot(t_fractol *fract);
 int		juliaset(t_fractol *fract);
 void	init_mandelbrot(t_mandelbrot *mb);

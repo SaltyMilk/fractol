@@ -27,6 +27,18 @@ int key_hook(int keycode, t_fractol *fract)
 	return(19);
 }
 
+int juliamod_hook(int x, int y, t_fractol *fract)
+{
+	if (x >= 0 && x <= 250 && y >= 0 && y <= 250)
+	{
+	fract->mb.pr = 1.5 * (x) / (fract->mb.zoom * DWW * 0.5);
+	fract->mb.pi = (y) / (fract->mb.zoom * DWH * 0.5);
+//	printf("mouse moved\npr=%f|pi=%f\n", fract->mb.pr, fract->mb.pi);
+	fract->func(fract);
+	}
+	return (42);
+}
+
 int mouse_hook(int keycode, int x, int y, t_fractol *fract)
 {
 	if (keycode == SCROLL_UP)
