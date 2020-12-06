@@ -1,4 +1,5 @@
-#include "fractol.h"
+#include <fractol.h>
+
 void handle_args(int argc, char **argv, t_fractol *f)
 {
 	int arg;

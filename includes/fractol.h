@@ -1,32 +1,44 @@
 #ifndef FRACTOL_H
-#define FRACTOL_H
+# define FRACTOL_H
 
-#include "mlx/mlx.h"
-#include "libft/libft.h"
-#include <math.h>
-#include <stdio.h>
-#include <pthread.h>
+# include <libft.h>
+# include <mlx.h>
+# include <math.h>
+# include <stdio.h>
+# include <pthread.h>
 
-#define DWW 1024
-#define DWH 750
-#define MOVE_VAL 0.1
+# if __linux
+ # define ESC 65307
+ # define SCROLL_UP 5
+ # define SCROLL_DOWN 4
 
-#define ESC 53
-#define SCROLL_UP 5
-#define SCROLL_DOWN 4
+ # define ARR_UP 65364
+ # define ARR_DOWN 65362
+ # define ARR_RIGHT 65363
+ # define ARR_LEFT 65361
+# else
+ # define ESC 53
+ # define SCROLL_UP 5
+ # define SCROLL_DOWN 4
 
+ # define ARR_UP 125
+ # define ARR_DOWN 126
+ # define ARR_RIGHT 124
+ # define ARR_LEFT 123
+# endif
 
-#define ARR_UP 125
-#define ARR_DOWN 126
-#define ARR_RIGHT 124
-#define ARR_LEFT 123
+# define DWW 1024
+# define DWH 750
+# define MOVE_VAL 0.1
+# define MIN_COLOR 65
 
-#define MIN_COLOR 65
 /*
 **VALUE SHOULDN'T BE ABOVE 16777216 && under or equal to 0 for MAX_ITERATION
 */
-#define MAX_ITERATION 256
-#define N_THREAD 4
+# define MAX_ITERATION 4
+
+# define N_THREAD 12
+
 typedef struct	s_mandelbrot
 {
 	double			pr;

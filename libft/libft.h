@@ -20,6 +20,10 @@
 
 # define LIB_LONG_MAX 9223372036854775807L
 
+# ifndef OPEN_MAX
+#  define OPEN_MAX 65455
+# endif
+
 //NEEDED TO LINK C LIB WITH C++
 #ifdef __cplusplus
 extern "C"{

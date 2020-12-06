@@ -1,4 +1,4 @@
-#include "fractol.h"
+#include <fractol.h>
 
 void init_mandelbrot(t_mandelbrot *mb)
 {

@@ -1,4 +1,4 @@
-#include "fractol.h"
+#include <fractol.h>
 
 int key_hook(int keycode, t_fractol *fract)
 {

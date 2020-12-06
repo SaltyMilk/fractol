@@ -1,5 +1,4 @@
-#include "fractol.h"
-
+#include <fractol.h>
 
 int iterate_juliaset(t_mandelbrot mb)
 {
