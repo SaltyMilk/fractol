@@ -1,4 +1,4 @@
-SRC = main.c key_input.c mandelbrot.c
+SRC = main.c key_input.c mandelbrot.c juliaset.c
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -framework OpenGl -I libft -I mlx\

@@ -15,7 +15,6 @@
 #define SCROLL_UP 5
 #define SCROLL_DOWN 4
 
-#define N_THREAD 2
 
 #define ARR_UP 125
 #define ARR_DOWN 126
@@ -27,7 +26,7 @@
 **VALUE SHOULDN'T BE ABOVE 16777216 && under or equal to 0 for MAX_ITERATION
 */
 #define MAX_ITERATION 256
-
+#define N_THREAD 8
 typedef struct	s_mandelbrot
 {
 	double			pr;
@@ -43,20 +42,28 @@ typedef struct	s_mandelbrot
 	pthread_t		thread[N_THREAD];
 	pthread_mutex_t mutex;
 }				t_mandelbrot;
-
+typedef struct s_fractol t_fractol;
 typedef struct	s_fractol
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
+	int 			(*func)(t_fractol *);
 	t_mandelbrot	mb;
 }				t_fractol;
 
+typedef struct	s_thread_arg
+{
+	int start;
+	int end;
+	t_fractol	*f;
+}				t_ta;
 
 int		exit_hook(void);
 int		key_hook(int keycode, t_fractol *param);
 int		mouse_hook(int keycode, int x, int y, t_fractol *fract);
 int		mandelbrot(t_fractol *fract);
+int		juliaset(t_fractol *fract);
 void	init_mandelbrot(t_mandelbrot *mb);
 
 #endif
