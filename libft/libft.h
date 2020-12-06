@@ -16,18 +16,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
 
-# define LIB_LONG_MAX 9223372036854775807L
-
-# ifndef OPEN_MAX
-#  define OPEN_MAX 65455
-# endif
-
-//NEEDED TO LINK C LIB WITH C++
-#ifdef __cplusplus
-extern "C"{
-#endif
 size_t			ft_strlen(const char *str);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
@@ -37,7 +26,6 @@ int				ft_isprint(int c);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
 int				ft_atoi(const char *str);
-int             ft_atoi_base(const char *str, const char *base);
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
@@ -74,10 +62,10 @@ typedef struct	s_list
 }				t_list;
 
 t_list			*ft_lstnew(void *content);
-void			ft_lstadd_front(t_list **alst, t_list *);
+void			ft_lstadd_front(t_list **alst, t_list *new);
 int				ft_lstsize(t_list *lst);
 t_list			*ft_lstlast(t_list *lst);
-void			ft_lstadd_back(t_list **alst, t_list *);
+void			ft_lstadd_back(t_list **alst, t_list *new);
 void			ft_lstdelone(t_list *lst, void(*del)(void *));
 void			ft_lstclear(t_list **lst, void(*del)(void *));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
@@ -89,25 +77,4 @@ void			ft_sort_int_tab(int *tab, int size);
 void			ft_rev_int_tab(int *tab, size_t size);
 int				ft_pow(int n, int pow);
 int				*ft_range(int min, int max);
-//ADDED FUNCTIONS
-char			**ft_strtok(char *str, char *charset);
-int				get_next_line(int fd, char **line);
-//GNL UTILS
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-void	delol(char *tempbuffer, char mod);
-char	*ultstrcat(char *s1, char *s2);
-int		eolp(char *buffer, char mod);
-void	fill_tempbuffer(char *tempbuffer, char *buffer, int eolp);
-//END OF GNL UTILS
-int							ft_satoi(const char *str);
-size_t						ft_satost(const char *str);
-char	*ft_strlowcase(char *str);
-char	*ft_strupcase(char *str);
-#ifdef __cplusplus
-}
-#endif
 #endif
