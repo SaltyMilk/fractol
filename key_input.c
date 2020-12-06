@@ -7,40 +7,39 @@ int key_hook(int keycode, t_fractol *fract)
 	if (keycode == ARR_UP)
 	{
 		fract->mb.move_i += MOVE_VAL / fract->mb.zoom;
-		mandelbrot(fract, &fract->mb);
+		mandelbrot(fract);
 	}
 	else if (keycode == ARR_DOWN)
 	{
 		fract->mb.move_i -= MOVE_VAL / fract->mb.zoom;
-		mandelbrot(fract, &fract->mb);
+		mandelbrot(fract);
 	}
 	else if (keycode == ARR_RIGHT)
 	{
 		fract->mb.move_r += MOVE_VAL / fract->mb.zoom;
-		mandelbrot(fract, &fract->mb);
+		mandelbrot(fract);
 	}
 	else if (keycode == ARR_LEFT)
 	{
 		fract->mb.move_r -= MOVE_VAL / fract->mb.zoom;
-		mandelbrot(fract, &fract->mb);
+		mandelbrot(fract);
 	}
 	return(19);
 }
 
 int mouse_hook(int keycode, int x, int y, t_fractol *fract)
 {
-	printf("x=%d, y = %d\n", x, y);
 	(void)x;
 	(void)y;
-	if (keycode == 5)
+	if (keycode == SCROLL_UP)
 	{
 		fract->mb.zoom *= 1.1;
-		mandelbrot(fract, &fract->mb);
+		mandelbrot(fract);
 	}
-	else if (keycode == 4)
+	else if (keycode == SCROLL_DOWN)
 	{
 		fract->mb.zoom /= 1.1;
-		mandelbrot(fract, &fract->mb);
+		mandelbrot(fract);
 	}
 	return(19);
 }
