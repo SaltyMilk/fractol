@@ -4,7 +4,6 @@
 # include <libft.h>
 # include <mlx.h>
 # include <math.h>
-# include <stdio.h>
 # include <pthread.h>
 
 # if __linux
@@ -35,9 +34,11 @@
 /*
 **VALUE SHOULDN'T BE ABOVE 16777216 && under or equal to 0 for MAX_ITERATION
 */
-# define MAX_ITERATION 256
+# ifndef MAX_ITERATION
+ # define MAX_ITERATION 512
+# endif
 
-# define N_THREAD 1
+# define N_THREAD 4
 
 typedef struct	s_mandelbrot
 {
