@@ -37,7 +37,7 @@
 */
 # define MAX_ITERATION 256
 
-# define N_THREAD 4
+# define N_THREAD 1
 
 typedef struct	s_mandelbrot
 {
@@ -78,6 +78,7 @@ int		mouse_hook(int keycode, int x, int y, t_fractol *fract);
 int		juliamod_hook(int x, int y, t_fractol *fract);
 int		mandelbrot(t_fractol *fract);
 int		juliaset(t_fractol *fract);
+int		thirdfract(t_fractol *fract);
 void	init_mandelbrot(t_mandelbrot *mb);
 
 #endif

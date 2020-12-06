@@ -12,13 +12,13 @@ MINILIBX_PATH = ./minilibx_opengl
 endif
 
 SRC_PATH = srcs
-SRC_NAME = main.c key_input.c mandelbrot.c juliaset.c
+SRC_NAME = main.c key_input.c mandelbrot.c juliaset.c thirdFract.c
 
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 CC = clang
-CFLAGS = -Wall -Wextra -O3
+CFLAGS = -Wall -Wextra -Werror
 
 CPPFLAGS = -Iincludes -Ilibft -I$(MINILIBX_NAME)
 LDFLAGS = -Llibft -L$(MINILIBX_NAME)
