@@ -13,7 +13,7 @@
 
 #define ESC 53
 #define SCROLL_UP 5
-#define SCROLL_DOWN 3
+#define SCROLL_DOWN 4
 
 #define N_THREAD 2
 

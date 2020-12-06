@@ -50,7 +50,6 @@ void mandeloop(t_fractol *f, t_mandelbrot mb, int start[2], int lim[2])
 		}
 		y++;
 	}
-
 }
 
 
@@ -72,12 +71,8 @@ void *calc_pixels(void *fract)
 	pthread_mutex_unlock(&f->mb.mutex);
 	if (id == 1 || id == 3)
 		start[0] = DWW / 2;
-/*	if (id == 2 || id == 3)
-		start[1] = DWH / 2;*/
 	if (id == 0 || id == 2)
 		lim[0] /= 2;
-/*	if (id == 0 || id == 1)
-		lim[1] /= 2;*/
 	mandeloop(f, f->mb, start, lim);
 	return(NULL);
 }
