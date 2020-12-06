@@ -9,7 +9,7 @@ NAME = fractol
 
 all : $(NAME)
 
-$(NAME) : $(SRC)
+$(NAME) : $(SRC) fractol.h
 	cd libft && make bonus && cd ..	
 	cd mlx && make && cd ..
 	$(CC) $(CFLAGS) -o $(NAME) $(SRC)

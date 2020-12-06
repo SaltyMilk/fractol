@@ -27,31 +27,38 @@ int iterate_mandelbrot(t_mandelbrot *mb)
 	return (i);
 }
 
-int mandelbrot(t_fractol fract, t_mandelbrot *mb)
+void calculate_each_pixel(t_fractol *f)
 {
 	int x;
 	int y;
-	unsigned int color = 0;
 	int i;
-	int tmp;
+	unsigned int color;
 
-	mb->img_data = mlx_get_data_addr(fract.img_ptr, &tmp, &tmp, &tmp);
 	y = 0;
 	while (y < DWH)
 	{
 		x = 0;
 		while (x < DWW)
 		{
-			mb->pr = 1.5 * (x - DWW  / 2) / (mb->zoom * DWW * 0.5) + mb->move_r;
-			mb->pi = (y - DWH / 2) / (mb->zoom * DWH * 0.5) + mb->move_i;
+			f->mb.pr = 1.5 * (x - DWW  / 2) / (f->mb.zoom * DWW * 0.5) + f->mb.move_r;
+			f->mb.pi = (y - DWH / 2) / (f->mb.zoom * DWH * 0.5) + f->mb.move_i;
 			
-			i = iterate_mandelbrot(mb);
+			i = iterate_mandelbrot(&f->mb);
 			color = (i < MAX_ITERATION) ? ((16777216-MIN_COLOR) / MAX_ITERATION) * i + MIN_COLOR : 0;
-			((unsigned int *)mb->img_data)[y * DWW + x] = color;
+			((unsigned int *)f->mb.img_data)[y * DWW + x] = color;
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(fract.mlx_ptr, fract.win_ptr, fract.img_ptr, 0, 0);
+}
+
+int mandelbrot(t_fractol *fract, t_mandelbrot *mb)
+{
+	int tmp;
+	(void)mb;
+	mb->img_data = mlx_get_data_addr(fract->img_ptr, &tmp, &tmp, &tmp);
+	calculate_each_pixel(fract);
+
+	mlx_put_image_to_window(fract->mlx_ptr, fract->win_ptr, fract->img_ptr, 0, 0);
 	return (0);
 }

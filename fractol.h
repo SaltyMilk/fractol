@@ -6,13 +6,22 @@
 #include <math.h>
 #include <stdio.h>
 
-#define ESC 53
 #define DWW 1000
 #define DWH 750
+#define MOVE_VAL 0.1
+
+#define ESC 53
+#define SCROLL_UP 5
+#define SCROLL_DOWN 3
+
+#define ARR_UP 125
+#define ARR_DOWN 126
+#define ARR_RIGHT 124
+#define ARR_LEFT 123
 
 #define MIN_COLOR 65
 /*
-**VALUE SHOULDN'T BE ABOVE 16777216 && under or equal to 0
+**VALUE SHOULDN'T BE ABOVE 16777216 && under or equal to 0 for MAX_ITERATION
 */
 #define MAX_ITERATION 256
 
@@ -42,7 +51,7 @@ typedef struct	s_fractol
 int		exit_hook(void);
 int		key_hook(int keycode, t_fractol *param);
 int		mouse_hook(int keycode, int x, int y, t_fractol *fract);
-int		mandelbrot(t_fractol fract, t_mandelbrot *mb);
+int		mandelbrot(t_fractol *fract, t_mandelbrot *mb);
 void	init_mandelbrot(t_mandelbrot *mb);
 
 #endif
