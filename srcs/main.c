@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-melc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/07 10:31:12 by sel-melc          #+#    #+#             */
+/*   Updated: 2019/11/05 18:35:28 by sel-melc         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fractol.h>
 
-void handle_args(int argc, char **argv, t_fractol *f)
+void	handle_args(int argc, char **argv, t_fractol *f)
 {
 	int arg;
 
@@ -9,17 +21,17 @@ void handle_args(int argc, char **argv, t_fractol *f)
 		{
 			arg = atoi(argv[1]);
 			if (arg == 0 && (f->func = &mandelbrot))
-				return;
+				return ;
 			else if (arg == 1 && (f->func = &juliaset))
 				return ;
 			else if (arg == 2 && (f->func = &thirdfract))
-				return;
+				return ;
 		}
-	ft_putstr_fd("Arg err, list of args:\n0:mandelbrot\n1:juliaset\n2:thirdfract", 2);
+	ft_putstr_fd("Arg err:\n0:mandelbrot\n1:juliaset\n2:thirdfract\n", 2);
 	exit(2);
 }
 
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_fractol f;
 

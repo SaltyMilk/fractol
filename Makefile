@@ -12,7 +12,7 @@ MINILIBX_PATH = ./minilibx_opengl
 endif
 
 SRC_PATH = srcs
-SRC_NAME = main.c key_input.c mandelbrot.c juliaset.c thirdFract.c
+SRC_NAME = main.c key_input.c mandelbrot.c juliaset.c thirdfract.c
 
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -38,10 +38,6 @@ all: libft minilibx_all $(NAME)
 $(NAME): $(OBJ) $(MINILIBX_NAME)/libmlx.a libft/libft.a 
 	@$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
 	@echo "Compilation of fractol:	\033[1;32mOK\033[m"
-
-acid: libft minilibx_all $(SRC) $(MINILIBX_NAME)/libmlx.a libft/libft.a 
-	@$(CC) $(LDFLAGS) $(LDLIBS) -D MAX_ITERATION=512 $(SRC) $(MINILIBX_NAME)/libmlx.a libft/libft.a -o $(NAME)
-	@echo "\033[1;32mFractol on acid ready\033[m"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir -pv $(OBJ_PATH) 2> /dev/null || true

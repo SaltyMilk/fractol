@@ -12,13 +12,7 @@
 
 #include <fractol.h>
 
-void	init_mandelbrot(t_mandelbrot *mb)
-{
-	ft_bzero(mb, sizeof(t_mandelbrot));
-	mb->zoom = 1;
-}
-
-int		iterate_mandelbrot(t_mandelbrot mb)
+int		iterate_third(t_mandelbrot mb)
 {
 	int i;
 
@@ -29,8 +23,8 @@ int		iterate_mandelbrot(t_mandelbrot mb)
 	{
 		mb.old_i = mb.f_i;
 		mb.old_r = mb.f_r;
-		mb.f_i = 2 * mb.old_r * mb.old_i + mb.pi;
-		mb.f_r = mb.old_r * mb.old_r - mb.old_i * mb.old_i + mb.pr;
+		mb.f_i = 2 * mb.old_r * mb.old_i + mb.pi - mb.old_i;
+		mb.f_r = mb.old_r * mb.old_r - mb.old_i * mb.old_i + mb.pr - mb.old_r;
 		if ((mb.f_r * mb.f_r + mb.f_i * mb.f_i) > 4)
 			return (i);
 		i++;
@@ -38,7 +32,7 @@ int		iterate_mandelbrot(t_mandelbrot mb)
 	return (i);
 }
 
-void	mandeloop(t_fractol *f, t_mandelbrot mb, int start[2], int lim[2])
+void	thirdloop(t_fractol *f, t_mandelbrot mb, int start[2], int lim[2])
 {
 	int			x;
 	int			y;
@@ -53,7 +47,7 @@ void	mandeloop(t_fractol *f, t_mandelbrot mb, int start[2], int lim[2])
 		{
 			mb.pr = 1.5 * (x - DWW / 2) / (mb.zoom * DWW * 0.5) + mb.move_r;
 			mb.pi = (y - DWH / 2) / (mb.zoom * DWH * 0.5) + mb.move_i;
-			i = iterate_mandelbrot(mb);
+			i = iterate_third(mb);
 			c = (i < MAX_ITER) ? ((TBM - M_C) / MAX_ITER) * i + M_C : 0;
 			((unsigned int *)f->mb.img_data)[y * DWW + x] = c;
 			x++;
@@ -62,7 +56,7 @@ void	mandeloop(t_fractol *f, t_mandelbrot mb, int start[2], int lim[2])
 	}
 }
 
-void	*calc_pixels(void *ta)
+void	*tcalc_pix(void *ta)
 {
 	t_fractol	*f;
 	int			start[2];
@@ -74,11 +68,11 @@ void	*calc_pixels(void *ta)
 	lim[1] = DWH;
 	start[0] = ((t_ta *)ta)->start;
 	lim[0] = ((t_ta *)ta)->end;
-	mandeloop(f, f->mb, start, lim);
+	thirdloop(f, f->mb, start, lim);
 	return (NULL);
 }
 
-int		mandelbrot(t_fractol *f)
+int		thirdfract(t_fractol *f)
 {
 	int		tmp;
 	int		i;
@@ -91,7 +85,7 @@ int		mandelbrot(t_fractol *f)
 		ta[i].f = f;
 		ta[i].start = (DWW / N_THREAD) * i;
 		ta[i].end = (DWW / N_THREAD) * (i + 1);
-		pthread_create(&(f->mb.thread[i]), NULL, calc_pixels, (void *)&(ta[i]));
+		pthread_create(&(f->mb.thread[i]), NULL, tcalc_pix, (void *)&(ta[i]));
 		i++;
 	}
 	i = 0;

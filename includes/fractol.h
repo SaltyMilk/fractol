@@ -29,13 +29,13 @@
 # define DWW 1024
 # define DWH 750
 # define MOVE_VAL 0.1
-# define MIN_COLOR 65
-
+# define M_C 65
+# define TBM 16777216
 /*
 **VALUE SHOULDN'T BE ABOVE 16777216 && under or equal to 0 for MAX_ITERATION
 */
-# ifndef MAX_ITERATION
- # define MAX_ITERATION 512
+# ifndef MAX_ITER
+ # define MAX_ITER 512
 # endif
 
 # define N_THREAD 4
@@ -55,7 +55,9 @@ typedef struct	s_mandelbrot
 	pthread_t		thread[N_THREAD];
 	pthread_mutex_t mutex;
 }				t_mandelbrot;
+
 typedef struct s_fractol t_fractol;
+
 typedef struct	s_fractol
 {
 	void			*mlx_ptr;
@@ -68,8 +70,8 @@ typedef struct	s_fractol
 
 typedef struct	s_thread_arg
 {
-	int start;
-	int end;
+	int			start;
+	int			end;
 	t_fractol	*f;
 }				t_ta;
 
